@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+//Import all dependencies, other Components
+import Header from './my-components/Header'; //import Header Component
+import Footer from './my-components/Footer'; //import Footer Component
+import Home from './my-components/Home'; //import Home Component
 
+//Function Component "App"
 function App() {
+
+    //Component UI: HTML Rendering
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <> {/*React Fragment: serve as parent component in JSX and doesn't add anything to the DOM */}
+      <h1 className='bg-warning p-3 text-center'>ITWD6.408: PROJECT 2</h1>
+      <Header />
+      <Home />
+      <Footer />
+    </>
   );
 }
-
+//Export this component to the entire app, can be re-used or hooked into other Components
 export default App;
