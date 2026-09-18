@@ -13,7 +13,7 @@ function Footer() {
     //Component UI: HTML Rendering
     return(<>
         <footer style={footerStyle}>
-            <p className='text-center'>Advanced Web App Development. @2023.</p>
+            <p className='text-center'>Advanced Web App Development. @2026.</p>
         </footer>
     </>);
 }

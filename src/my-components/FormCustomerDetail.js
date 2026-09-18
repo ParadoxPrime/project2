@@ -45,6 +45,25 @@ function FormCustomerDetail() {
             <label className="col-12 col-md-12 col-lg-4">Suburb</label>
             <input className="col-12 col-md-12 col-lg-7" type="text" />
         </div>
+
+        <div className="row mt-1">
+            <label className="col-12 col-md-12 col-lg-4">City *</label>
+            <input className="col-12 col-md-12 col-lg-7" type="text" required/>
+        </div>
+        <div className="row mt-1">
+            <label className="col-12 col-md-12 col-lg-4">Post Code</label>
+            <input className="col-12 col-md-12 col-lg-7" type="text" />
+        </div>
+        <div className="row mt-1">
+            <label className="col-12 col-md-12 col-lg-4">Phone Number *</label>
+            <input className="col-12 col-md-12 col-lg-7" type="text" required/>
+        </div>
+        <div className="row mt-1">
+            <label className="col-12 col-md-12 col-lg-4">Email *</label>
+            <input className="col-12 col-md-12 col-lg-7" type="email" required/>
+        </div>
+
+
     </>);
 }
 //Export this component to the entire app, can be re-used or hooked into other Components
