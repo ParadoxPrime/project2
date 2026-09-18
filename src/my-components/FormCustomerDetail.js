@@ -31,32 +31,60 @@ function FormCustomerDetail() {
 
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">First Name *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="text" required/>
+            <input className="col-12 col-md-12 col-lg-7" type="text"
+                pattern="^[A-Za-z][A-Za-z\s'-]*$"
+                title="Please enter a valid first name using letters, spaces, apostrophes, or hyphens."
+                onInput={(e) => e.target.setCustomValidity('')}
+                required />
         </div>
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Last Name *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="text" required/>
+            <input className="col-12 col-md-12 col-lg-7" type="text"
+                pattern="^[A-Za-z][A-Za-z\s'-]*$"
+                title="Please enter a valid last name using letters, spaces, apostrophes, or hyphens."
+                onInput={(e) => e.target.setCustomValidity('')}
+                required />
         </div>
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Street *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="text" required/>
+            <input className="col-12 col-md-12 col-lg-7" type="text"
+                pattern="^[A-Za-z0-9\s.'-]+$"
+                title="Please enter a valid street address."
+                onInput={(e) => e.target.setCustomValidity('')}
+                required />
         </div>
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Suburb</label>
-            <input className="col-12 col-md-12 col-lg-7" type="text" />
+            <input className="col-12 col-md-12 col-lg-7" type="text"
+                pattern="^[A-Za-z\s.'-]*$"
+                title="Please enter a valid suburb name."
+                onInput={(e) => e.target.setCustomValidity('')}
+            />
         </div>
 
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">City *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="text" required/>
+            <input className="col-12 col-md-12 col-lg-7" type="text"
+                pattern="^[A-Za-z\s.'-]+$"
+                title="Please enter a valid city name."
+                onInput={(e) => e.target.setCustomValidity('')}
+                required />
         </div>
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Post Code</label>
-            <input className="col-12 col-md-12 col-lg-7" type="text" />
+            <input className="col-12 col-md-12 col-lg-7" type="text"
+                pattern="^\d{4}$"
+                title="Please enter a 4-digit postcode."
+                onInput={(e) => e.target.setCustomValidity('')}
+            />
         </div>
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Phone Number *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="text" required/>
+            <input className="col-12 col-md-12 col-lg-7" type="text"
+                pattern="^(?:\+64\s?|0)?(?:\d{1,2}[\s-]?)?\d{3,4}[\s-]?\d{3,4}$"
+                title="Please enter a valid NZ phone number, e.g. 021 123 4567 or +64 21 123 4567."
+                onInput={(e) => e.target.setCustomValidity('')}
+                required />
         </div>
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Email *</label>
