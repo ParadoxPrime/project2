@@ -83,7 +83,13 @@ function FormRepairDetail() {
         {/*Other details*/}
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">IMEI *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="number" required />
+            <input className="col-12 col-md-12 col-lg-7" type="text"
+            inputMode="numeric"
+            pattern="[0-9]{15}"
+            maxLength={15}
+            title="Please enter a valid 15-digit IMEI number."
+            onInput={(e) => e.target.setCustomValidity('')}
+            required />
         </div>
         <div className="row mt-2">
             <label className="col-12 col-md-12 col-lg-4">Make *</label>
