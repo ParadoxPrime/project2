@@ -1,18 +1,51 @@
+import { useState } from "react";
+
+//Handle the warranty checkbox, improved functions credit to Michael in class.
+//Local date as YYYY-MM-DD
+const toLocalISO = (d) => d.toLocaleDateString("en-CA");
+
+//True if purchase date greater than 24 months before today
+const isOverTwoYears = (value) => {
+    if (!value) return false;
+    const cutoff = new Date();
+    cutoff.setHours(0, 0, 0, 0);
+    cutoff.setMonth(cutoff.getMonth() - 24);
+    return new Date(value + "T00:00:00") < cutoff;
+};
+
 //Function Component
 function FormRepairDetail() {
     //States
-    //Data
+    const [purchaseDate, setPurchaseDate] = useState("");
+    const [warranty, setWarranty] = useState(false);
+    //Date Limits
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    //Warranty is disabled until purchasedate entered,a nd when over 24months
+    //to leave enabled until a date is entered, use: isOverTwoYears(purchaseDate);
+    const warrantyDisabled = !purchaseDate || isOverTwoYears(purchaseDate);
+
     //Methods and functions
-    const handleWarrantyChange = (e) => {
+    const handlePurchaseDateChange = (e) => {
+        const value = e.target.value;
+        setPurchaseDate(value);
+        //Untick box if becoming disabled to prevent incorrect 'true' states
+        if (!value || isOverTwoYears(value)) setWarranty(false);
+    }
+
+    //Old warranty handler function. Deprecated.
+    const OLD_handleWarrantyChange = (e) => { 
         //Handle the warranty checkbox
         let purchaseDate = new Date(document.getElementById('purchaseDate').value);//Get entered purchase date
         let currentDate = new Date();//Get today
         let diffTime = Math.abs(currentDate - purchaseDate);//Get the difference in milliseconds
-        let diffMonth = Math.ceil(diffTime/ 1000*60*60*24*30);//Convert milliseconds to months
-        if(diffMonth <= 12){//If the difference is less than or equal to 12 months, then it is under warranty
-            document.getElementById('warrantyCheckbox').checked = true;//Check the checkbox
-        }else{
-            document.getElementById('warrantyCheckbox').checked = false;//Uncheck the checkbox
+        let diffMonth = Math.ceil(diffTime/ (1000*60*60*24*30));//Convert milliseconds to months
+        if(diffMonth > 24){//If the difference is more than 24 months (2 years), the warranty is disabled
+            document.getElementById('warrantyCheckbox').disabled = true;
+        } else {
+            document.getElementById('warrantyCheckbox').disabled = false;
         }
     }
 
@@ -23,13 +56,16 @@ function FormRepairDetail() {
             <label class="col-12 col-md-12 col-lg-4">Purchase Date *</label>
             <input class="col-12 col-md-12 col-lg-7" type="date" id="purchaseDate"
                 max={/*purchase date must not be before today*/
-                    new Date(Date.now()).toISOString().split("T")[0]}
-                onChange={handleWarrantyChange}
+                    toLocalISO(today)}
+                value={purchaseDate}
+                onChange={handlePurchaseDateChange}
             required/>
         </div>
         <div class="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Repair Date *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="date" required/>
+            <input className="col-12 col-md-12 col-lg-7" type="date" 
+            min={toLocalISO(tomorrow)}
+            required/>
         </div>
         {/*Under Warranty*/}
         <div className="row">
@@ -37,7 +73,10 @@ function FormRepairDetail() {
                 <legend className="col-11 float-none w-auto">Under Warranty</legend>
                 <div>
                     <label className="col-12 col-md-12 col-lg-4">Warranty</label>
-                    <input type="checkbox" id="warrantyCheckbox" />
+                    <input type="checkbox" id="warrantyCheckbox" 
+                    checked={warranty}
+                    disabled={warrantyDisabled} 
+                    onChange={(e) => setWarranty(e.target.checked)}/>
                 </div>
             </fieldset>
         </div>
