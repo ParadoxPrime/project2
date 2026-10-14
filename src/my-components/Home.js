@@ -4,12 +4,27 @@ import FormRepairDetail from './FormRepairDetail';
 import FormCourtesyPhone from './FormCourtesyPhone';
 import FormCost from './FormCost';
 import FormButtons from './FormButtons';
+import { useNavigate } from "react-router-dom";
 
 //Function Component
 function Home() {
+
+const navigate = useNavigate();
+const onSubmit = async(event) => {
+    event.preventDefault();//prevent browser from sending data to server
+    try {
+        //open the "Bookings" component
+        //alert('Form was submitted!');
+        navigate("/Bookings");
+    }
+    catch(e) {
+        alert('ERROR!!!');
+    }
+    }
+
     //Component UI: HTML Rendering
     return(<>
-        <form className="row" style={{minHeight: '60vh'}}>
+        <form className="row" style={{minHeight: '60vh'}} onSubmit={onSubmit}>
             {/*Customner Details*/}
             <div className="col-12 col-lg-4 p-4 m-0"
             style={{minHeight:'30vh', backgroundColor:'#FCF3CF'}}> <FormCustomerDetail />

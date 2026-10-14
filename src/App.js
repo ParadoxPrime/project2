@@ -1,9 +1,11 @@
 //Import all dependencies, other Components
+import { BrowserRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
+//
 import Header from './my-components/Header'; //import Header Component
 import Footer from './my-components/Footer'; //import Footer Component
 import Home from './my-components/Home'; //import Home Component
 import AdvancedJS from './my-components/AdvancedJS'; //import AdvancedJS Component
-import { BrowserRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
+import FAQ from './my-components/FAQ';//import FAQ Component
 
 //Function Component "App"
 function App() {
@@ -15,7 +17,9 @@ function App() {
         <Header /> {/*Header Component*/}
         <Routes>
           <Route path="/" element={<Home />} /> {/*Home Component*/}
-          <Route path="/advanced-js" element={<AdvancedJS />} /> {/*AdvancedJS Component*/}
+          <Route path="/AdvancedJS" element={<AdvancedJS />} /> {/*AdvancedJS Component*/}
+          <Route path="/FAQ" element={<FAQ />} /> {/*FAQ Page*/}
+          <Route path="/Bookings" element={<Bookings />} />
         </Routes>
         <Footer /> {/*Footer Component*/}
       </BrowserRouter>
