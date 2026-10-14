@@ -15,7 +15,7 @@ const onSubmit = async(event) => {
     try {
         //open the "Bookings" component
         //alert('Form was submitted!');
-        navigate("/Bookings");
+        navigate("/bookings");
     }
     catch(e) {
         alert('ERROR!!!');

@@ -14,7 +14,7 @@ function FAQ() {
     return(<>
     <div style={{minHeight: '60vh'}}>
 
-        <h1>Frequently Asked Questions</h1>
+        <h1>FAQ: Keyword Search</h1>
         {/*Add search box on top*/}
         <div className='row'>
             <input className='col-11 m-3'

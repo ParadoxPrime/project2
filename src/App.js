@@ -6,6 +6,7 @@ import Footer from './my-components/Footer'; //import Footer Component
 import Home from './my-components/Home'; //import Home Component
 import AdvancedJS from './my-components/AdvancedJS'; //import AdvancedJS Component
 import FAQ from './my-components/FAQ';//import FAQ Component
+import Bookings from './my-components/Bookings';//import Bookings Component
 
 //Function Component "App"
 function App() {
