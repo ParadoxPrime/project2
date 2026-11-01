@@ -27,7 +27,7 @@ function FAQ() {
         <h1>Frequently Asked Questions</h1>
         {/*Loop through all questions and display them*/}
         <div>
-            {/*nd extract “question” & “answer” */}
+            {/*And extract “question” & “answer” */}
             {Questions.filter(
                 question => question.question.toLowerCase().includes(enteredKeywords.toLowerCase())
                 || question.answer.toLowerCase().includes(enteredKeywords.toLowerCase())

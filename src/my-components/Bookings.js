@@ -8,6 +8,7 @@ function Bookings() {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [enteredKeywords, setEnteredKeywords] = useState(''); //State for keyword search
 
     // Fetch bookings from supa
     const fetchBookings = async () => {
@@ -35,13 +36,29 @@ function Bookings() {
         fetchBookings();
     }, []);
 
+    const keyword = enteredKeywords.trim().toLowerCase();
+    const filteredBookings = bookings.filter((booking) =>
+        [booking.title, booking.first_name, booking.last_name, booking.bond, booking.service]
+            .some((value) => String(value ?? '').toLowerCase().includes(keyword))
+    );
+
     //Component UI: HTML Rendering
     return (
         <>
             <h1>Bookings</h1>
+
+            {/*Add search box on top*/}
+            <div className='row'>
+                <input className='col-11 m-3'
+                    type='text'
+                    name='search'
+                    onChange={(e) => {setEnteredKeywords(e.target.value)} } placeholder='Keywords' >
+                </input>
+            </div>
+
             {/*Retrieve data from bookings table on supabase */}
             {loading ? (<p>Loading bookings...</p>) : error ? (<p style={{ color: "red" }}>Error: {error}</p>) : (
-                bookings.map((booking) => (
+                filteredBookings.map((booking) => (
                 <div key={booking.id}
                     style={{ border: "1px solid gray", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
                     <p>{booking.title + ": " + booking.first_name + " " + booking.last_name}</p>
