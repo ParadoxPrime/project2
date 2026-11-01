@@ -5,7 +5,8 @@ import FormCourtesyPhone from './FormCourtesyPhone';
 import FormCost from './FormCost';
 import FormButtons from './FormButtons';
 import { useState } from 'react';
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { supabase } from './include/supabaseClient';
 
 //Function Component
 function Home() {
@@ -22,22 +23,53 @@ function Home() {
 
     //----
     //Pass customer details from Child1(FormCustomerDetail) to Parent(Home)
-    const [customerDetails, setCustomerDetails] = useState({title: "Mr", firstname: "", lastname: ""});
+    const [customerDetails, setCustomerDetails] = useState({
+        title: "",
+        firstname: "",
+        lastname: ""
+    });
 
     //-----------
+    //Data
     const navigate = useNavigate();
+    
+    //Form Submit Event Handler
     const onSubmit = async(event) => {
         event.preventDefault();//prevent browser from sending data to server
         try {
-            //for hardcode test: let customerdetails = {title: "Mr", firstname: "John", lastname: "Doe"};
-            //Build the attached data
-            const attachedData = {
-                sharedBond,
-                sharedCustomerType,
-                customerDetails,
+            //1: Build bookingData Object
+            const bookingData = {
+                customertype: sharedCustomerType ? "customer" : "business",
+                title: customerDetails.title,
+                first_name: customerDetails.firstname,
+                last_name: customerDetails.lastname,
+                bond: sharedCustomerType ? sharedBond : 0,
+                service: sharedWarranty ? 0 : 85
             };
-            //embed this attached data with the link
-            navigate("/bookings");
+            // log the built data to console for verification
+            console.log("bookingData: ", bookingData);
+        
+            //2: Insert bookingData into Supabase table
+            try {
+                //insert data to supabase
+                const { data, error } = await supabase.from('bookings').insert([bookingData]);
+                //handle error
+                if (error) {
+                    throw error;
+                }
+                //Log success and refresh bookings
+                console.log("Booking data inserted successfully:", data);
+                //Clear Form
+                event.target.reset();
+            } catch (error) {
+                console.error("Error inserting bookings:", error);
+            }
+            
+            //3: Notify User
+            alert('Booking submitted successfully!');
+
+            //Navigate to bookings page
+            navigate('/bookings');
         }
         catch(e) {
             alert('onSubmit Error: ' + e.message);
