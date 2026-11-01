@@ -2,8 +2,11 @@
 import { useState } from 'react';
 
 //Function Component
-function FormCourtesyPhone() {
-
+function FormCourtesyPhone( { passDataToParent } ) {
+    //"passDataToParent" is a callback function: function passDataToParent(value)
+    //The callback function is to change a piece of the state that is a part of the parent component.
+    
+    
     //Courtesy Phone Form Component
     let courtesyList = [ 
         {id: 1, type: 'phone', name: 'iphone 10', bond: 275},
@@ -12,25 +15,34 @@ function FormCourtesyPhone() {
         {id: 4, type: 'phone', name: 'samsung galaxy', bond: 200},
         {id: 5, type: 'phone', name: 'nokia', bond: 150},
         {id: 6, type: 'phone', name: 'xiaomi', bond: 100},
-
         {id: 7, type: 'charger', name: 'iphone charger', bond: 45},
         {id: 8, type: 'charger', name: 'samsung charger', bond: 30},
         {id: 9, type: 'charger', name: 'nokia charger', bond: 25},
         {id: 10, type: 'charger', name: 'xiaomi', bond: 25}
     ];
 
-    //Declare "state"
+    //Declare "state" variables, for courtesy phones
     const [phoneBorrow, setPhoneBorrow] = useState(0);// 0 = 'none'
+    const getBond = (id) => courtesyList.find(item => item.id === id)?.bond ?? 0;
+
     //Handle "onChange" event
     let addPhone = (selectedOption) => {
-        selectedOption == 'none' ? setPhoneBorrow(0) : setPhoneBorrow(Number(selectedOption));
+        const updateId = selectedOption === 'none' ? 0 : Number(selectedOption);
+        setPhoneBorrow(updateId);
+        const updateBond = getBond(updateId) + getBond(chargerBorrow);
+        //Send data upto Parent by calling callback function "passDataToParent"
+        passDataToParent(updateBond); //Child1 (FormCourtesyPhone)
     }
 
     //Declare state, for courtesy chargers
     const [chargerBorrow, setChargerBorrow] = useState(0);// 0 = 'none'
     //Handle "onChange" event
     let addCharger = (selectedOption) => {
-        selectedOption == 'none' ? setChargerBorrow(0) : setChargerBorrow(Number(selectedOption));
+        const updateId = selectedOption === 'none' ? 0 : Number(selectedOption);
+        setChargerBorrow(updateId);
+        const updateBond = getBond(phoneBorrow) + getBond(updateId);
+        //Send data upto Parent by calling callback function "passDataToParent"
+        passDataToParent(updateBond); //Child1 (FormCourtesyPhone)
     }
 
     //Component UI: HTML Rendering
@@ -41,8 +53,9 @@ function FormCourtesyPhone() {
         <div className="row mt-2 ms-3">
             <label className="col-12 col-md-12 col-lg-4">Item Type </label>
             <select className="col-12 col-md-12 col-lg-7"
+                value={phoneBorrow === 0 ? 'none' : String(phoneBorrow)}
                 onChange={(selected) => addPhone(selected.target.value)}>
-                <option value="none" selected>None</option>
+                <option value="none">None</option>
                 <option value="1">iPhone 10</option>
                 <option value="2">iPhone 14</option>
                 <option value="3">iPhone 16</option>
@@ -57,8 +70,9 @@ function FormCourtesyPhone() {
         <div className="row mt-2 ms-3">
             <label className="col-12 col-md-12 col-lg-4">Item Type </label>
             <select className="col-12 col-md-12 col-lg-7" id="courtesyChargerSelect"
+                value={chargerBorrow === 0 ? 'none' : String(chargerBorrow)}
                 onChange={(selected) => addCharger(selected.target.value)}>
-                <option value="none" selected>None</option>
+                <option value="none">None</option>
                 <option value="7">iPhone Charger</option>
                 <option value="8">Samsung Charger</option>
                 <option value="9">Nokia Charger</option>
@@ -75,17 +89,17 @@ function FormCourtesyPhone() {
                 </tr>
 
             {/*Display all items in the state in the table */}
-            {phoneBorrow == 0 ? (null) : (
+            {phoneBorrow === 0 ? (null) : (
                 <tr>
-                    <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].name}</td>
-                    <td>{courtesyList.filter(item => {return item.id == phoneBorrow})[0].bond}</td>
+                    <td>{courtesyList.filter(item => {return item.id === phoneBorrow})[0].name}</td>
+                    <td>{courtesyList.filter(item => {return item.id === phoneBorrow})[0].bond}</td>
                 </tr>
             )
             }
-            {chargerBorrow == 0 ? (null) : (
+            {chargerBorrow === 0 ? (null) : (
                 <tr>
-                    <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].name}</td>
-                    <td>{courtesyList.filter(item => {return item.id == chargerBorrow})[0].bond}</td>
+                    <td>{courtesyList.filter(item => {return item.id === chargerBorrow})[0].name}</td>
+                    <td>{courtesyList.filter(item => {return item.id === chargerBorrow})[0].bond}</td>
                 </tr>
             )}
             </table>

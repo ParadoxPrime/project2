@@ -14,7 +14,12 @@ const isOverTwoYears = (value) => {
 };
 
 //Function Component
-function FormRepairDetail() {
+function FormRepairDetail( { passDataToParent } ) {
+
+    const updateWarranty = (value) => {
+        passDataToParent(value); //Child 1 FormCourtesyPhone
+    }
+
     //States
     const [purchaseDate, setPurchaseDate] = useState("");
     const [warranty, setWarranty] = useState(false);
@@ -35,7 +40,7 @@ function FormRepairDetail() {
         if (!value || isOverTwoYears(value)) setWarranty(false);
     }
 
-    //Old warranty handler function. Deprecated.
+    //Old warranty handler function. Deprecated and unused.
     const OLD_handleWarrantyChange = (e) => { 
         //Handle the warranty checkbox
         let purchaseDate = new Date(document.getElementById('purchaseDate').value);//Get entered purchase date
@@ -48,6 +53,7 @@ function FormRepairDetail() {
             document.getElementById('warrantyCheckbox').disabled = false;
         }
     }
+    //Deprecated function END
 
     //Component UI: HTML Rendering
     return(<>
@@ -76,7 +82,10 @@ function FormRepairDetail() {
                     <input type="checkbox" id="warrantyCheckbox" 
                     checked={warranty}
                     disabled={warrantyDisabled} 
-                    onChange={(e) => setWarranty(e.target.checked)}/>
+                    onChange={(event) => {
+                        setWarranty(event.target.checked);
+                        updateWarranty(event.target.checked);
+                    }}/>
                 </div>
             </fieldset>
         </div>
