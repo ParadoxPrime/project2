@@ -1,5 +1,37 @@
+//import dependancies and other comps
+import { useState, useEffect } from 'react';
+
 //Function Component
-function FormCustomerDetail() {
+function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
+    //-----
+    //customer type state
+    const [type, setType] = useState({customer: "checked", business: ""});
+    //update Customer Type
+    const updateCustomerType = (event) => {
+     if (event.target.value === "customer") {
+        passDataToParent(true);
+        setType({customer: "checked", business: ""});
+        } else {
+            passDataToParent(false);
+            setType({customer: "", business: "checked"});
+        }
+    }
+    //---------
+    //Customer Details
+    const [customerDetails, setCustomerDetails] = useState({title: "Mr", firstname: "", lastname: "",});
+
+    const handleChange = (event) => {
+        const { name, value } = event.target; //Get updated pair-value: "name" and "value"
+        setCustomerDetails( {...customerDetails, ...{[name]: value} } );
+    }
+    //useEffect() hook synchronizes a component with another component or external system
+    //useEffect Hook syntax is: useEffect(() => {}, [dependencies]);
+    useEffect( () => {
+        //callback function
+        sendCustomerDetails(customerDetails);
+    }, [customerDetails]);
+    
+
     //Component UI: HTML Rendering
     return(<>
         <h2>Customer Details</h2>
@@ -20,7 +52,10 @@ function FormCustomerDetail() {
         {/*Details*/}
         <div className="row mt-2">
             <label className="col-12 col-md-12 col-lg-4">Title *</label>
-            <select className="col-12 col-md-12 col-lg-7">
+            <select className="col-12 col-md-12 col-lg-7"
+                defaultValue="Mr"
+                name="title"
+                onChange={handleChange} required>
                 <option value="Mr" selected>Mr</option>
                 <option value="Mrs">Mrs</option>
                 <option value="Ms">Ms</option>
@@ -34,6 +69,8 @@ function FormCustomerDetail() {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^[A-Za-z][A-Za-z\s'-]*$"
                 title="Please enter a valid first name using letters, spaces, apostrophes, or hyphens."
+                name="firstname"
+                onChange={handleChange}
                 onInput={(e) => e.target.setCustomValidity('')}
                 required />
         </div>
@@ -42,6 +79,8 @@ function FormCustomerDetail() {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^[A-Za-z][A-Za-z\s'-]*$"
                 title="Please enter a valid last name using letters, spaces, apostrophes, or hyphens."
+                name="lastname"
+                onChange={handleChange}
                 onInput={(e) => e.target.setCustomValidity('')}
                 required />
         </div>
