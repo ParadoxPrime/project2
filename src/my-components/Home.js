@@ -18,7 +18,7 @@ function Home() {
     const [sharedWarranty, setSharedWarranty] = useState(false);//Child2(FormCost) receive data from Child1
     //Child1 FormCustomerDetail and Child2 FormCost
     const updateCustomerType = (value) => setSharedCustomerType(value);//Child1(FormCustomerDetail) pass data to Child2
-    const [sharedCustomerType, setSharedCustomerType] = useState({});//Child2(FormCost) receive data from Child1
+    const [sharedCustomerType, setSharedCustomerType] = useState("customer");//Child2(FormCost) receive data from Child1
 
     //----
     //Pass customer details from Child1(FormCustomerDetail) to Parent(Home)
@@ -51,7 +51,7 @@ function Home() {
             <div className="col-12 col-lg-4 p-4 m-0"
             style={{minHeight:'30vh', backgroundColor:'#FCF3CF'}}>
                 <FormCustomerDetail passDataToParent={updateCustomerType}
-                    sendCustomerDetails={(value) => setCustomerDetails(value)} />
+                    sendCustomerDetails={setCustomerDetails} />
             </div>
 
             {/*Repair Details*/}

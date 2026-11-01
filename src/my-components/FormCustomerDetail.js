@@ -3,20 +3,13 @@ import { useState, useEffect } from 'react';
 
 //Function Component
 function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
-    //-----
-    //customer type state
-    const [type, setType] = useState({customer: "checked", business: ""});
-    //update Customer Type
+    const [customerType, setCustomerType] = useState("customer");
     const updateCustomerType = (event) => {
-     if (event.target.value === "customer") {
-        passDataToParent(true);
-        setType({customer: "checked", business: ""});
-        } else {
-            passDataToParent(false);
-            setType({customer: "", business: "checked"});
-        }
+        const updatedCustomerType = event.target.value;
+        setCustomerType(updatedCustomerType);
+        passDataToParent(updatedCustomerType);
     }
-    //---------
+
     //Customer Details
     const [customerDetails, setCustomerDetails] = useState({title: "Mr", firstname: "", lastname: "",});
 
@@ -29,7 +22,7 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
     useEffect( () => {
         //callback function
         sendCustomerDetails(customerDetails);
-    }, [customerDetails]);
+    }, [customerDetails, sendCustomerDetails]);
     
 
     //Component UI: HTML Rendering
@@ -41,11 +34,15 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
                 <legend className="col-11 float-none w-auto">Customer type *</legend>
                 <div>
                     <label className="col-12 col-md-12 col-lg-4">Customer</label>
-                    <input type="radio" name="customer-type" value="customer" checked />
+                    <input type="radio" name="customer-type" value="customer"
+                        checked={customerType === "customer"}
+                        onChange={updateCustomerType} />
                 </div>
                 <div>
                     <label className="col-12 col-md-12 col-lg-4">Business</label>
-                    <input type="radio" name="customer-type" value="business" />
+                    <input type="radio" name="customer-type" value="business"
+                        checked={customerType === "business"}
+                        onChange={updateCustomerType} />
                 </div>
             </fieldset>
         </div>
