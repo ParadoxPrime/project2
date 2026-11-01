@@ -1,29 +1,14 @@
 //import dependancies and other comps
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 //Function Component
-function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
+function FormCustomerDetail({ passDataToParent }) {
     const [customerType, setCustomerType] = useState("customer");
     const updateCustomerType = (event) => {
         const updatedCustomerType = event.target.value;
         setCustomerType(updatedCustomerType);
         passDataToParent(updatedCustomerType);
     }
-
-    //Customer Details
-    const [customerDetails, setCustomerDetails] = useState({title: "Mr", firstname: "", lastname: "",});
-
-    const handleChange = (event) => {
-        const { name, value } = event.target; //Get updated pair-value: "name" and "value"
-        setCustomerDetails( {...customerDetails, ...{[name]: value} } );
-    }
-    //useEffect() hook synchronizes a component with another component or external system
-    //useEffect Hook syntax is: useEffect(() => {}, [dependencies]);
-    useEffect( () => {
-        //callback function
-        sendCustomerDetails(customerDetails);
-    }, [customerDetails, sendCustomerDetails]);
-    
 
     //Component UI: HTML Rendering
     return(<>
@@ -34,13 +19,13 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
                 <legend className="col-11 float-none w-auto">Customer type *</legend>
                 <div>
                     <label className="col-12 col-md-12 col-lg-4">Customer</label>
-                    <input type="radio" name="customer-type" value="customer"
+                    <input type="radio" name="customer_type" value="customer"
                         checked={customerType === "customer"}
                         onChange={updateCustomerType} />
                 </div>
                 <div>
                     <label className="col-12 col-md-12 col-lg-4">Business</label>
-                    <input type="radio" name="customer-type" value="business"
+                    <input type="radio" name="customer_type" value="business"
                         checked={customerType === "business"}
                         onChange={updateCustomerType} />
                 </div>
@@ -52,8 +37,8 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
             <select className="col-12 col-md-12 col-lg-7"
                 defaultValue="Mr"
                 name="title"
-                onChange={handleChange} required>
-                <option value="Mr" selected>Mr</option>
+                required>
+                <option value="Mr">Mr</option>
                 <option value="Mrs">Mrs</option>
                 <option value="Ms">Ms</option>
                 <option value="Miss">Miss</option>
@@ -66,8 +51,7 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^[A-Za-z][A-Za-z\s'-]*$"
                 title="Please enter a valid first name using letters, spaces, apostrophes, or hyphens."
-                name="firstname"
-                onChange={handleChange}
+                name="first_name"
                 onInput={(e) => e.target.setCustomValidity('')}
                 required />
         </div>
@@ -76,8 +60,7 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^[A-Za-z][A-Za-z\s'-]*$"
                 title="Please enter a valid last name using letters, spaces, apostrophes, or hyphens."
-                name="lastname"
-                onChange={handleChange}
+                name="last_name"
                 onInput={(e) => e.target.setCustomValidity('')}
                 required />
         </div>
@@ -86,6 +69,7 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^[A-Za-z0-9\s.'-]+$"
                 title="Please enter a valid street address."
+                name="street"
                 onInput={(e) => e.target.setCustomValidity('')}
                 required />
         </div>
@@ -94,6 +78,7 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^[A-Za-z\s.'-]*$"
                 title="Please enter a valid suburb name."
+                name="suburb"
                 onInput={(e) => e.target.setCustomValidity('')}
             />
         </div>
@@ -103,6 +88,7 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^[A-Za-z\s.'-]+$"
                 title="Please enter a valid city name."
+                name="city"
                 onInput={(e) => e.target.setCustomValidity('')}
                 required />
         </div>
@@ -111,6 +97,7 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^\d{4}$"
                 title="Please enter a 4-digit postcode."
+                name="postcode"
                 onInput={(e) => e.target.setCustomValidity('')}
             />
         </div>
@@ -119,12 +106,13 @@ function FormCustomerDetail( {passDataToParent, sendCustomerDetails} ) {
             <input className="col-12 col-md-12 col-lg-7" type="text"
                 pattern="^(?:\+64\s?|0)?(?:\d{1,2}[\s-]?)?\d{3,4}[\s-]?\d{3,4}$"
                 title="Please enter a valid NZ phone number, e.g. 021 123 4567 or +64 21 123 4567."
+                name="phone"
                 onInput={(e) => e.target.setCustomValidity('')}
                 required />
         </div>
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Email *</label>
-            <input className="col-12 col-md-12 col-lg-7" type="email" required/>
+            <input className="col-12 col-md-12 col-lg-7" type="email" name="email" required/>
         </div>
 
 

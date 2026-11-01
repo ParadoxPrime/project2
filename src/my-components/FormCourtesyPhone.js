@@ -53,6 +53,7 @@ function FormCourtesyPhone( { passDataToParent } ) {
         <div className="row mt-2 ms-3">
             <label className="col-12 col-md-12 col-lg-4">Item Type </label>
             <select className="col-12 col-md-12 col-lg-7"
+                name="courtesy_phone"
                 value={phoneBorrow === 0 ? 'none' : String(phoneBorrow)}
                 onChange={(selected) => addPhone(selected.target.value)}>
                 <option value="none">None</option>
@@ -70,6 +71,7 @@ function FormCourtesyPhone( { passDataToParent } ) {
         <div className="row mt-2 ms-3">
             <label className="col-12 col-md-12 col-lg-4">Item Type </label>
             <select className="col-12 col-md-12 col-lg-7" id="courtesyChargerSelect"
+                name="courtesy_charger"
                 value={chargerBorrow === 0 ? 'none' : String(chargerBorrow)}
                 onChange={(selected) => addCharger(selected.target.value)}>
                 <option value="none">None</option>

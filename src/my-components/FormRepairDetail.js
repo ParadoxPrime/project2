@@ -63,7 +63,8 @@ function FormRepairDetail( { passDataToParent } ) {
             <input class="col-12 col-md-12 col-lg-7" type="date" id="purchaseDate"
                 max={/*purchase date must not be before today*/
                     toLocalISO(today)}
-                value={purchaseDate}
+                    name="purchase_date"
+                    value={purchaseDate}
                 onChange={handlePurchaseDateChange}
             required/>
         </div>
@@ -71,6 +72,7 @@ function FormRepairDetail( { passDataToParent } ) {
             <label className="col-12 col-md-12 col-lg-4">Repair Date *</label>
             <input className="col-12 col-md-12 col-lg-7" type="date" 
             min={toLocalISO(tomorrow)}
+            name="repair_date"
             required/>
         </div>
         {/*Under Warranty*/}
@@ -80,6 +82,7 @@ function FormRepairDetail( { passDataToParent } ) {
                 <div>
                     <label className="col-12 col-md-12 col-lg-4">Warranty</label>
                     <input type="checkbox" id="warrantyCheckbox" 
+                    name="warranty"
                     checked={warranty}
                     disabled={warrantyDisabled} 
                     onChange={(event) => {
@@ -95,6 +98,7 @@ function FormRepairDetail( { passDataToParent } ) {
             <input className="col-12 col-md-12 col-lg-7" type="text"
             inputMode="numeric"
             pattern="[0-9]{15}"
+            name="imei"
             maxLength={15}
             title="Please enter a valid 15-digit IMEI number."
             onInput={(e) => e.target.setCustomValidity('')}
@@ -102,8 +106,8 @@ function FormRepairDetail( { passDataToParent } ) {
         </div>
         <div className="row mt-2">
             <label className="col-12 col-md-12 col-lg-4">Make *</label>
-            <select className="col-12 col-md-12 col-lg-7">
-                <option value="Apple" selected>Apple</option>
+            <select className="col-12 col-md-12 col-lg-7" name="make" defaultValue="Apple">
+                <option value="Apple">Apple</option>
                 <option value="LG">LG</option>
                 <option value="Motorola">Motorola</option>
                 <option value="Nokia">Nokia</option>
@@ -114,12 +118,12 @@ function FormRepairDetail( { passDataToParent } ) {
         </div>
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Model Number</label>
-            <input className="col-12 col-md-12 col-lg-7" type="text"/>
+            <input className="col-12 col-md-12 col-lg-7" type="text" name="model_number"/>
         </div>
         <div className="row mt-2">
             <label className="col-12 col-md-12 col-lg-4">Fault Category *</label>
-            <select className="col-12 col-md-12 col-lg-7">
-                <option value="Battery" selected>Battery</option>
+            <select className="col-12 col-md-12 col-lg-7" name="fault_category" defaultValue="Battery">
+                <option value="Battery">Battery</option>
                 <option value="Screen">Screen</option>
                 <option value="Charging">Charging</option>
                 <option value="SD-Storage">SD-Storage</option>
@@ -130,7 +134,7 @@ function FormRepairDetail( { passDataToParent } ) {
 
         <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Description</label>
-            <textarea className="col-12 col-md-12 col-lg-7" style={{ resize: 'none' }} rows="7"></textarea>
+            <textarea className="col-12 col-md-12 col-lg-7" name="description" style={{ resize: 'none' }} rows="7"></textarea>
         </div>
     </>);
 }
