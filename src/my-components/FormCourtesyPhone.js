@@ -84,7 +84,8 @@ function FormCourtesyPhone( { passDataToParent } ) {
         {/*Table of added Courtesy items*/}
         <h4 className='ms-4 mt-2'>Borrow items</h4>
         <div className="row mt-2 ms-3 me-3 bg-white">
-            <table class="table table-bordered" >
+            <table className="table table-bordered" >
+                <tbody>
                 <tr>
                     <td>Item</td>
                     <td>Cost</td>
@@ -104,6 +105,7 @@ function FormCourtesyPhone( { passDataToParent } ) {
                     <td>{courtesyList.filter(item => {return item.id === chargerBorrow})[0].bond}</td>
                 </tr>
             )}
+            </tbody>
             </table>
         </div>
     </>);

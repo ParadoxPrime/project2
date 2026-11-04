@@ -1,5 +1,5 @@
 //Import all dependencies, other Components
-import { BrowserRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //
 import Header from './my-components/Header'; //import Header Component
 import Footer from './my-components/Footer'; //import Footer Component

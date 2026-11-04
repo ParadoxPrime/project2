@@ -40,27 +40,12 @@ function FormRepairDetail( { passDataToParent } ) {
         if (!value || isOverTwoYears(value)) setWarranty(false);
     }
 
-    //Old warranty handler function. Deprecated and unused.
-    const OLD_handleWarrantyChange = (e) => { 
-        //Handle the warranty checkbox
-        let purchaseDate = new Date(document.getElementById('purchaseDate').value);//Get entered purchase date
-        let currentDate = new Date();//Get today
-        let diffTime = Math.abs(currentDate - purchaseDate);//Get the difference in milliseconds
-        let diffMonth = Math.ceil(diffTime/ (1000*60*60*24*30));//Convert milliseconds to months
-        if(diffMonth > 24){//If the difference is more than 24 months (2 years), the warranty is disabled
-            document.getElementById('warrantyCheckbox').disabled = true;
-        } else {
-            document.getElementById('warrantyCheckbox').disabled = false;
-        }
-    }
-    //Deprecated function END
-
     //Component UI: HTML Rendering
     return(<>
         <h2>Repair Details</h2>
         <div className="row mt-1">
-            <label class="col-12 col-md-12 col-lg-4">Purchase Date *</label>
-            <input class="col-12 col-md-12 col-lg-7" type="date" id="purchaseDate"
+            <label className="col-12 col-md-12 col-lg-4">Purchase Date *</label>
+            <input className="col-12 col-md-12 col-lg-7" type="date" id="purchaseDate"
                 max={/*purchase date must not be before today*/
                     toLocalISO(today)}
                     name="purchase_date"
@@ -68,7 +53,7 @@ function FormRepairDetail( { passDataToParent } ) {
                 onChange={handlePurchaseDateChange}
             required/>
         </div>
-        <div class="row mt-1">
+        <div className="row mt-1">
             <label className="col-12 col-md-12 col-lg-4">Repair Date *</label>
             <input className="col-12 col-md-12 col-lg-7" type="date" 
             min={toLocalISO(tomorrow)}
