@@ -67,7 +67,7 @@ function AdvancedJS() {
                 <div class="accordion-item"> {/*<!--Demo 3-->*/}
                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionDemo">
                         <div class="accordion-body">
-                            <div class="bg-warning fs-2 p-2 text-center">Community Discussing Board</div>
+                            <div class="bg-warning fs-2 p-2 text-center">Community Discussion Board</div>
                             <div>
                                 <Demo3 />
                             </div>
