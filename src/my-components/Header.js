@@ -24,10 +24,13 @@ function Header() {
             <div className="col-12 col-md-12 col-lg-4">
                 <div className="row">
                     {/*Button 1*/}
-                    <Link to="/" className="col-12 col-md-6 col-lg-6 p-0 m-0 bg-info border border-dark text-center
+                    <Link to="/" className="col-12 col-md-4 col-lg-4 p-0 m-0 bg-info border border-dark text-center
                     text-white" style={{textDecoration: 'none'}}>HOME</Link>
                     {/*Button 2*/}
-                    <Link to="/AdvancedJS" className="col-12 col-md-6 col-lg-6 p-0 m-0 bg-info border border-dark
+                    <Link to="/bookings" className="col-12 col-md-4 col-lg-4 p-0 m-0 bg-info border border-dark
+                    text-center text-white" style={{textDecoration: 'none'}}>BOOKINGS</Link>
+                    {/*Button 3*/}
+                    <Link to="/AdvancedJS" className="col-12 col-md-4 col-lg-4 p-0 m-0 bg-info border border-dark
                     text-center text-white" style={{textDecoration: 'none'}}>EXTENSION</Link>
                 </div>
             </div>

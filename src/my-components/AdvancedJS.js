@@ -2,6 +2,7 @@
 import Demo1 from './js-demos/demo1.js';
 import Demo2 from './js-demos/demo2.js';
 import Demo3 from './js-demos/demo3.js';
+import Demo4 from './js-demos/demo4.js';
 //Constants and functions
 
 
@@ -78,9 +79,9 @@ function AdvancedJS() {
                 <div class="accordion-item"> {/*<!--Demo 4-->*/}
                     <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionDemo">
                         <div class="accordion-body">
-                            <div class="bg-warning fs-2 p-2 text-center">Placeholder Title</div>   
+                            <div class="bg-warning fs-2 p-2 text-center">Repair Bookings Dashboard</div>
                             <div>
-                                {/*DEMO SPACE*/}
+                                <Demo4 />
                             </div>
                         </div>
                     </div>
