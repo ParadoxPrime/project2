@@ -1,3 +1,8 @@
+//Imports
+import Demo1 from './js-demos/demo1.js';
+//Constants and functions
+
+
 //Function Component
 function AdvancedJS() {
     //Component UI: HTML Rendering
@@ -5,7 +10,7 @@ function AdvancedJS() {
     <div style={{minHeight: '60vh'}}>
         <div class="accordion row align-items-start g-1" id="accordionDemo">{/*Start of All Demos Section*/}
         
-            <div class="row col-12 col-lg-3 g-1">
+            <div class="row col-12 col-lg-3 g-1">{/*Accordian Header Buttons*/}
                 <h2 class="accordion-header col-6 col-lg-12">
                     <button class="accordion-button border border-primary" type="button" 
 							data-bs-toggle="collapse" data-bs-target="#collapseOne">
@@ -40,7 +45,7 @@ function AdvancedJS() {
                         <div class="accordion-body">
                             <div class="bg-warning fs-2 p-2 text-center">Placeholder Title</div>   
                             <div>
-                                {/*DEMO SPACE*/}
+                                <Demo1 />
                             </div>
                         </div>
                     </div>
