@@ -1,5 +1,7 @@
 //Imports
 import Demo1 from './js-demos/demo1.js';
+import Demo2 from './js-demos/demo2.js';
+import Demo3 from './js-demos/demo3.js';
 //Constants and functions
 
 
@@ -43,7 +45,7 @@ function AdvancedJS() {
                 <div class="accordion-item"> {/*<!--Demo 1-->*/}
                     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionDemo">
                         <div class="accordion-body">
-                            <div class="bg-warning fs-2 p-2 text-center">Placeholder Title</div>   
+                            <div class="bg-warning fs-2 p-2 text-center">Courtesy Phone Shopping Cart Demo</div>   
                             <div>
                                 <Demo1 />
                             </div>
@@ -54,9 +56,9 @@ function AdvancedJS() {
                 <div class="accordion-item"> {/*<!--Demo 2-->*/}
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionDemo">
                         <div class="accordion-body">
-                            <div class="bg-warning fs-2 p-2 text-center">Placeholder Title</div>   
+                            <div class="bg-warning fs-2 p-2 text-center">Supabase Account Login / Sign Up</div>   
                             <div>
-                                {/*DEMO SPACE*/}
+                                <Demo2 />
                             </div>
                         </div>
                     </div>
@@ -65,9 +67,9 @@ function AdvancedJS() {
                 <div class="accordion-item"> {/*<!--Demo 3-->*/}
                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionDemo">
                         <div class="accordion-body">
-                            <div class="bg-warning fs-2 p-2 text-center">Placeholder Title</div>   
+                            <div class="bg-warning fs-2 p-2 text-center">Community Discussing Board</div>
                             <div>
-                                {/*DEMO SPACE*/}
+                                <Demo3 />
                             </div>
                         </div>
                     </div>
